@@ -8,7 +8,7 @@ button[kind="header"] { display: none !important; }
 
 .block-container { padding-top: 1rem !important; max-width: 100% !important; }
 
-/* Colunas do board: mesma altura, preenchem o viewport */
+/* Colunas do board: altura travada e alinhadas */
 [data-testid="stHorizontalBlock"]:has(.board-col) {
     align-items: stretch !important;
 }
@@ -16,12 +16,13 @@ button[kind="header"] { display: none !important; }
     background: #F4F6FB;
     border-radius: 10px;
     padding: 0.6rem !important;
-    min-height: calc(100vh - 280px);
-    align-self: stretch !important;
+    height: clamp(460px, 72vh, 780px);
+    max-height: clamp(460px, 72vh, 780px);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
-[data-testid="stColumn"]:has(.board-col) > div,
-[data-testid="stColumn"]:has(.board-col) > div > div {
-    min-height: inherit;
+[data-testid="stColumn"]:has(.board-col) > div {
+    height: 100%;
 }
 .board-col { display: none; }
 
@@ -172,6 +173,11 @@ button[kind="header"] { display: none !important; }
 ::-webkit-scrollbar-thumb:hover { background: #818CF8; }
 
 @media (max-width: 768px) {
+    [data-testid="stColumn"]:has(.board-col) {
+        height: auto;
+        max-height: none;
+        overflow: visible;
+    }
     .kanban-card { padding: 0.7rem; }
     .kanban-badges { gap: 0.25rem; }
     .kanban-badge { font-size: 0.65rem; padding: 0.1rem 0.4rem; }
