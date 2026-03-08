@@ -123,17 +123,17 @@ button[kind="header"] { display: none !important; }
 
 /* Botões dentro da barra de ações */
 [data-testid="stHorizontalBlock"]:has(.card-action-marker) [data-testid="stColumn"]:not(:first-child) .stButton > button {
-    font-size: 0.8rem !important;
+    font-size: 0.6rem !important;
     padding: 0 !important;
-    height: 26px !important;
+    height: 20px !important;
     width: 100% !important;
     background: transparent !important;
     border: none !important;
     border-left: 1px solid #E8EAF0 !important;
     border-radius: 0 !important;
-    color: #94A3B8 !important;
-    opacity: 0.75;
-    line-height: 26px !important;
+    color: #CBD5E1 !important;
+    opacity: 0.7;
+    line-height: 20px !important;
 }
 [data-testid="stHorizontalBlock"]:has(.card-action-marker) [data-testid="stColumn"]:not(:first-child) .stButton > button:hover {
     opacity: 1;
