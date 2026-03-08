@@ -75,7 +75,21 @@ url = "https://SEU-PROJETO.supabase.co"
 key = "SUA_ANON_KEY"
 ```
 
+Tambem sao aceitas chaves planas (util no Streamlit Cloud):
+
+```toml
+SUPABASE_URL = "https://SEU-PROJETO.supabase.co"
+SUPABASE_KEY = "SUA_ANON_KEY"
+```
+
 Observacao: `.streamlit/secrets.toml` esta no `.gitignore` e nao deve ser versionado.
+
+## Deploy no Streamlit Cloud
+
+1. Abra sua app no Streamlit Cloud.
+2. Va em `Settings > Secrets`.
+3. Cole um dos formatos de secrets mostrados acima.
+4. Salve e faça `Reboot app` se necessario.
 
 ## Como executar
 
