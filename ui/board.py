@@ -43,6 +43,8 @@ def render_board(filters: dict):
     for idx, (status_key, status_label, icon) in enumerate(COLUMNS):
         tasks = tasks_by_status.get(status_key, [])
         with cols[idx]:
+            # Marcador para o CSS identificar e estilizar esta coluna
+            st.markdown('<span class="board-col"></span>', unsafe_allow_html=True)
             st.markdown(
                 f'<div class="kanban-column-header">'
                 f'<h3>{icon} {status_label}</h3>'

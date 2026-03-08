@@ -9,15 +9,16 @@ button[kind="header"] { display: none !important; }
 .block-container { padding-top: 1rem !important; max-width: 100% !important; }
 
 /* Colunas do board: mesma altura, fundo de painel */
-[data-testid="stHorizontalBlock"]:has(.kanban-column-header) {
+[data-testid="stHorizontalBlock"]:has(.board-col) {
     align-items: stretch !important;
 }
-[data-testid="stHorizontalBlock"]:has(.kanban-column-header) > [data-testid="stColumn"] {
+[data-testid="stColumn"]:has(.board-col) {
     background: #F4F6FB;
     border-radius: 10px;
     padding: 0.6rem !important;
     min-height: 300px;
 }
+.board-col { display: none; }
 
 /* Header: azul escuro com texto branco */
 .kanban-header {
