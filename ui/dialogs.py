@@ -233,3 +233,51 @@ def manage_subcategories_dialog():
                 if st.button("🗑️", key=f"del_sub_{sub['id']}"):
                     cat_svc.delete_subcategory(sub["id"])
                     st.rerun()
+
+
+# ──────────────────────────────────────────────
+# Inline: Gerenciar subcategorias (para uso em tabs)
+# ──────────────────────────────────────────────
+def render_subcategories_manager():
+    """Renderiza o gerenciador de subcategorias inline (sem dialog)."""
+    cat_svc, _ = _get_services()
+    categories = cat_svc.get_all_categories()
+
+    cat_options = {c["id"]: c["name"] for c in categories}
+    selected_cat = st.selectbox(
+        "Categoria",
+        options=list(cat_options.keys()),
+        format_func=lambda x: cat_options[x],
+        key="inline_sub_cat",
+    )
+
+    st.divider()
+
+    col_a, col_b = st.columns([3, 1])
+    with col_a:
+        new_sub_name = st.text_input(
+            "Nova subcategoria",
+            key="inline_new_sub_name",
+            label_visibility="collapsed",
+            placeholder="Nome da nova subcategoria...",
+        )
+    with col_b:
+        if st.button("➕ Criar", use_container_width=True, key="inline_create_sub"):
+            if new_sub_name.strip():
+                cat_svc.create_subcategory(new_sub_name.strip(), selected_cat)
+                st.rerun()
+            else:
+                st.error("Informe um nome.")
+
+    subcategories = cat_svc.get_subcategories(selected_cat)
+    if not subcategories:
+        st.info("Nenhuma subcategoria cadastrada para esta categoria.")
+    else:
+        for sub in subcategories:
+            col1, col2 = st.columns([4, 1])
+            with col1:
+                st.markdown(f"**{sub['name']}**")
+            with col2:
+                if st.button("🗑️", key=f"inline_del_sub_{sub['id']}"):
+                    cat_svc.delete_subcategory(sub["id"])
+                    st.rerun()

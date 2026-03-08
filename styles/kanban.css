@@ -1,233 +1,79 @@
 /* ============================================= */
-/* Kanban Board - Custom CSS                     */
+/* Kanban Board - Light Theme CSS                */
 /* ============================================= */
 
-/* ---- Layout geral ---- */
-.block-container {
-    padding-top: 1rem !important;
-    max-width: 100% !important;
-}
+[data-testid="stSidebar"] { display: none !important; }
+section[data-testid="stSidebar"] { display: none !important; }
+button[kind="header"] { display: none !important; }
 
-/* ---- Colunas do board ---- */
-.kanban-column {
-    background: #1A1D23;
-    border-radius: 12px;
-    padding: 0.8rem;
-    min-height: 70vh;
+.block-container { padding-top: 1rem !important; max-width: 100% !important; }
+
+.kanban-header {
+    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+    color: #FFFFFF; padding: 1.2rem 1.5rem; border-radius: 12px;
+    margin-bottom: 1rem; display: flex; align-items: center;
+    justify-content: space-between; box-shadow: 0 4px 12px rgba(37,99,235,0.25);
 }
+.kanban-header h1 { margin: 0; font-size: 1.5rem; font-weight: 700; color: #FFFFFF; }
+.kanban-header p { margin: 0; font-size: 0.85rem; color: rgba(255,255,255,0.8); }
 
 .kanban-column-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 0.2rem;
-    margin-bottom: 0.5rem;
-    border-bottom: 2px solid #2D3139;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.6rem 0.8rem; margin-bottom: 0.6rem;
+    background: #E2E8F0; border-radius: 8px; border-bottom: 3px solid #2563EB;
 }
-
-.kanban-column-header h3 {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 600;
-}
-
+.kanban-column-header h3 { margin: 0; font-size: 1rem; font-weight: 600; color: #1E293B; }
 .kanban-counter {
-    background: #2D3139;
-    color: #FAFAFA;
-    border-radius: 50%;
-    width: 26px;
-    height: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 700;
+    background: #2563EB; color: #FFFFFF; border-radius: 50%;
+    width: 26px; height: 26px; display: flex; align-items: center;
+    justify-content: center; font-size: 0.8rem; font-weight: 700;
 }
 
-/* ---- Card ---- */
 .kanban-card {
-    background: #23262D;
-    border-radius: 10px;
-    padding: 0.85rem;
-    margin-bottom: 0.6rem;
-    border-left: 4px solid #6C63FF;
-    transition: transform 0.15s, box-shadow 0.15s;
+    background: #FFFFFF; border-radius: 8px; padding: 0.85rem;
+    margin-bottom: 0.6rem; border-left: 4px solid #2563EB;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: transform 0.15s, box-shadow 0.15s;
 }
+.kanban-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.kanban-card-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.35rem; color: #1E293B; word-break: break-word; }
+.kanban-card-desc { font-size: 0.78rem; color: #64748B; margin-bottom: 0.5rem; line-height: 1.4; word-break: break-word; max-height: 3.5em; overflow: hidden; }
 
-.kanban-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-}
+.kanban-badges { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.5rem; align-items: center; }
+.kanban-badge { font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 20px; white-space: nowrap; }
+.badge-category { color: #FFFFFF; opacity: 0.9; }
+.badge-subcategory { background: #F1F5F9; color: #475569; border: 1px solid #CBD5E1; }
 
-.kanban-card-title {
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin-bottom: 0.35rem;
-    color: #FAFAFA;
-    word-break: break-word;
-}
+.badge-alta { background: #FEE2E2; color: #EF4444; border: 1px solid #FECACA; }
+.badge-media { background: #FEF3C7; color: #F59E0B; border: 1px solid #FDE68A; }
+.badge-baixa { background: #DCFCE7; color: #22C55E; border: 1px solid #BBF7D0; }
 
-.kanban-card-desc {
-    font-size: 0.78rem;
-    color: #9EA3AE;
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
-    word-break: break-word;
-    max-height: 3.5em;
-    overflow: hidden;
-}
+.badge-prazo-ok { background: #DCFCE7; color: #22C55E; border: 1px solid #BBF7D0; }
+.badge-prazo-alerta { background: #FEF3C7; color: #F59E0B; border: 1px solid #FDE68A; }
+.badge-prazo-vencido { background: #FEE2E2; color: #EF4444; border: 1px solid #FECACA; }
+.badge-prazo-hoje { background: #FEE2E2; color: #EF4444; border: 1px solid #FECACA; animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
 
-/* ---- Badges ---- */
-.kanban-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
-    margin-bottom: 0.5rem;
-    align-items: center;
-}
+.big-new-task-btn .stButton > button { font-size: 1.1rem !important; padding: 0.6rem 2rem !important; border-radius: 8px !important; font-weight: 700 !important; }
 
-.kanban-badge {
-    font-size: 0.7rem;
-    font-weight: 600;
-    padding: 0.15rem 0.5rem;
-    border-radius: 20px;
-    white-space: nowrap;
-}
+.stTabs [data-baseweb="tab-list"] { gap: 0.5rem; background: #FFFFFF; border-radius: 8px; padding: 0.3rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.stTabs [data-baseweb="tab"] { font-weight: 600; font-size: 0.95rem; color: #64748B; border-radius: 6px; padding: 0.5rem 1rem; }
+.stTabs [aria-selected="true"] { background: #EFF6FF !important; color: #2563EB !important; }
 
-.badge-category {
-    color: #fff;
-    opacity: 0.9;
-}
+.stButton > button { font-size: 0.8rem !important; padding: 0.2rem 0.6rem !important; border-radius: 6px !important; }
+[data-testid="stDialog"] { min-width: 500px; }
 
-.badge-subcategory {
-    background: #2D3139;
-    color: #C0C4CC;
-    border: 1px solid #3A3F47;
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F1F5F9; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
 
-/* Prioridade */
-.badge-alta {
-    background: #FF4B4B22;
-    color: #FF4B4B;
-    border: 1px solid #FF4B4B55;
-}
-
-.badge-media {
-    background: #FFA72622;
-    color: #FFA726;
-    border: 1px solid #FFA72655;
-}
-
-.badge-baixa {
-    background: #66BB6A22;
-    color: #66BB6A;
-    border: 1px solid #66BB6A55;
-}
-
-/* Prazo */
-.badge-prazo-ok {
-    background: #66BB6A22;
-    color: #66BB6A;
-    border: 1px solid #66BB6A55;
-}
-
-.badge-prazo-alerta {
-    background: #FFA72622;
-    color: #FFA726;
-    border: 1px solid #FFA72655;
-}
-
-.badge-prazo-vencido {
-    background: #FF4B4B22;
-    color: #FF4B4B;
-    border: 1px solid #FF4B4B55;
-}
-
-.badge-prazo-hoje {
-    background: #FF4B4B22;
-    color: #FF4B4B;
-    border: 1px solid #FF4B4B55;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.6; }
-}
-
-/* ---- Botões de ação do card ---- */
-.kanban-actions {
-    display: flex;
-    gap: 0.3rem;
-    justify-content: flex-end;
-    margin-top: 0.4rem;
-    padding-top: 0.4rem;
-    border-top: 1px solid #2D3139;
-}
-
-/* ---- Sidebar ---- */
-[data-testid="stSidebar"] {
-    min-width: 280px;
-}
-
-[data-testid="stSidebar"] .block-container {
-    padding-top: 1rem;
-}
-
-/* ---- Responsividade ---- */
 @media (max-width: 768px) {
-    .kanban-column {
-        min-height: auto;
-        margin-bottom: 1rem;
-    }
-
-    .kanban-card {
-        padding: 0.7rem;
-    }
-
-    .kanban-badges {
-        gap: 0.25rem;
-    }
-
-    .kanban-badge {
-        font-size: 0.65rem;
-        padding: 0.1rem 0.4rem;
-    }
+    .kanban-card { padding: 0.7rem; }
+    .kanban-badges { gap: 0.25rem; }
+    .kanban-badge { font-size: 0.65rem; padding: 0.1rem 0.4rem; }
+    .kanban-header { flex-direction: column; text-align: center; gap: 0.5rem; }
+    .kanban-header h1 { font-size: 1.2rem; }
 }
-
 @media (max-width: 480px) {
-    .block-container {
-        padding-left: 0.5rem !important;
-        padding-right: 0.5rem !important;
-    }
-}
-
-/* ---- Scrollbar customizada ---- */
-::-webkit-scrollbar {
-    width: 6px;
-}
-
-::-webkit-scrollbar-track {
-    background: #1A1D23;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #3A3F47;
-    border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #4A4F57;
-}
-
-/* ---- Dialog/Modal fix ---- */
-[data-testid="stDialog"] {
-    min-width: 500px;
-}
-
-/* ---- Botões pequenos inline ---- */
-.stButton > button {
-    font-size: 0.8rem !important;
-    padding: 0.2rem 0.6rem !important;
-    border-radius: 6px !important;
+    .block-container { padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
 }

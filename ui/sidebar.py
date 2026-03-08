@@ -3,36 +3,35 @@ import streamlit as st
 from services.category_service import CategoryService
 
 
-def render_sidebar() -> dict:
-    """Renderiza a sidebar com filtros e retorna os filtros selecionados."""
+def render_top_filters() -> dict:
+    """Renderiza filtros inline no corpo principal e retorna os filtros selecionados."""
     if "cat_svc" not in st.session_state:
         st.session_state.cat_svc = CategoryService()
     cat_svc = st.session_state.cat_svc
 
     categories = cat_svc.get_all_categories()
 
-    with st.sidebar:
-        st.markdown("## 🔎 Filtros")
+    col1, col2, col3 = st.columns(3)
 
-        # Busca por texto
+    with col1:
         search = st.text_input(
-            "Buscar",
+            "🔍 Buscar",
             placeholder="Pesquisar por título ou descrição...",
             key="filter_search",
         )
 
-        # Filtro de categoria
+    with col2:
         cat_options = {c["id"]: c["name"] for c in categories}
         selected_cats = st.multiselect(
-            "Categoria",
+            "📂 Categoria",
             options=list(cat_options.keys()),
             format_func=lambda x: cat_options[x],
             key="filter_cats",
         )
 
-        # Filtro de prioridade
+    with col3:
         selected_priorities = st.multiselect(
-            "Prioridade",
+            "⚡ Prioridade",
             options=["alta", "media", "baixa"],
             format_func=lambda p: {
                 "alta": "🔴 Alta",
@@ -41,17 +40,6 @@ def render_sidebar() -> dict:
             }[p],
             key="filter_priorities",
         )
-
-        st.divider()
-
-        # Botões de ação
-        st.markdown("## ⚙️ Gerenciar")
-
-        if st.button("📁 Subcategorias", use_container_width=True):
-            st.session_state["open_subcategories_dialog"] = True
-
-        if st.button("➕ Nova Tarefa", use_container_width=True, type="primary"):
-            st.session_state["open_create_dialog"] = True
 
     return {
         "search": search.strip() if search else None,
