@@ -10,6 +10,8 @@ COLUMNS = [
     ("done", "Concluído", "✅"),
 ]
 
+STATUS_OPTIONS = ["todo", "in_progress", "done"]
+
 
 def _fetch_tasks(filters: dict) -> dict[str, list[dict]]:
     if "task_svc" not in st.session_state:
@@ -50,38 +52,43 @@ def render_board(filters: dict):
 
             if not tasks:
                 st.markdown(
-                    '<p style="color:#94A3B8; text-align:center; padding:2rem 0; '
-                    'font-size:0.85rem;">Nenhuma tarefa</p>',
+                    '<p class="empty-col-text">Nenhuma tarefa</p>',
                     unsafe_allow_html=True,
                 )
 
             for task in tasks:
                 st.markdown(render_card_html(task), unsafe_allow_html=True)
-                btn_cols = st.columns([1, 1, 1, 1])
 
-                if status_key != "todo":
-                    prev_status = "todo" if status_key == "in_progress" else "in_progress"
-                    with btn_cols[0]:
-                        if st.button(f"◀ {STATUS_ICONS.get(prev_status)}", key=f"left_{task['id']}",
-                                     help=f"Mover para {STATUS_LABELS[prev_status]}"):
-                            st.session_state.task_svc.move_task(task["id"], prev_status)
-                            st.rerun()
+                # Status dropdown + discrete action buttons
+                col_status, col_edit, col_del = st.columns([3, 1, 1])
 
-                with btn_cols[1]:
+                with col_status:
+                    st.markdown('<div class="card-status-select">', unsafe_allow_html=True)
+                    current_idx = STATUS_OPTIONS.index(status_key)
+                    new_status = st.selectbox(
+                        "Mover",
+                        options=STATUS_OPTIONS,
+                        format_func=lambda s: f"{STATUS_ICONS.get(s, '')} {STATUS_LABELS[s]}",
+                        index=current_idx,
+                        key=f"status_{task['id']}",
+                        label_visibility="collapsed",
+                    )
+                    st.markdown('</div>', unsafe_allow_html=True)
+                    if new_status != status_key:
+                        st.session_state.task_svc.move_task(task["id"], new_status)
+                        st.rerun()
+
+                with col_edit:
+                    st.markdown('<div class="card-actions">', unsafe_allow_html=True)
                     if st.button("✏️", key=f"edit_{task['id']}", help="Editar"):
                         st.session_state["edit_task"] = task
+                    st.markdown('</div>', unsafe_allow_html=True)
 
-                with btn_cols[2]:
+                with col_del:
+                    st.markdown('<div class="card-actions">', unsafe_allow_html=True)
                     if st.button("🗑️", key=f"del_{task['id']}", help="Excluir"):
                         st.session_state.task_svc.delete_task(task["id"])
                         st.rerun()
-
-                if status_key != "done":
-                    next_status = "in_progress" if status_key == "todo" else "done"
-                    with btn_cols[3]:
-                        if st.button(f"{STATUS_ICONS.get(next_status)} ▶", key=f"right_{task['id']}",
-                                     help=f"Mover para {STATUS_LABELS[next_status]}"):
-                            st.session_state.task_svc.move_task(task["id"], next_status)
-                            st.rerun()
+                    st.markdown('</div>', unsafe_allow_html=True)
 
                 st.markdown("<div style='margin-bottom:0.3rem'></div>", unsafe_allow_html=True)

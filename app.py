@@ -31,22 +31,12 @@ with col_btn:
         st.session_state["open_create_dialog"] = True
     st.markdown("</div>", unsafe_allow_html=True)
 
-if "current_filters" not in st.session_state:
-    st.session_state["current_filters"] = {"search": None, "category_ids": None, "priorities": None}
-
-tab_board, tab_filters, tab_subcats = st.tabs(["📋 Board", "🔎 Filtros", "📁 Subcategorias"])
+tab_board, tab_subcats = st.tabs(["📋 Board", "📁 Subcategorias"])
 
 with tab_board:
-    render_board(st.session_state["current_filters"])
-
-with tab_filters:
-    st.markdown("### 🔎 Filtros de Tarefas")
-    st.markdown("Configure os filtros e volte para a aba **Board** para ver os resultados.")
-    st.divider()
     filters = render_top_filters()
-    st.session_state["current_filters"] = filters
     st.divider()
-    st.info("💡 Os filtros são aplicados automaticamente ao Board.")
+    render_board(filters)
 
 with tab_subcats:
     st.markdown("### 📁 Gerenciar Subcategorias")
