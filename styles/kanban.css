@@ -8,7 +8,7 @@ button[kind="header"] { display: none !important; }
 
 .block-container { padding-top: 1rem !important; max-width: 100% !important; }
 
-/* Colunas do board: mesma altura, fundo de painel */
+/* Colunas do board: mesma altura, preenchem o viewport */
 [data-testid="stHorizontalBlock"]:has(.board-col) {
     align-items: stretch !important;
 }
@@ -16,7 +16,12 @@ button[kind="header"] { display: none !important; }
     background: #F4F6FB;
     border-radius: 10px;
     padding: 0.6rem !important;
-    min-height: 300px;
+    min-height: calc(100vh - 280px);
+    align-self: stretch !important;
+}
+[data-testid="stColumn"]:has(.board-col) > div,
+[data-testid="stColumn"]:has(.board-col) > div > div {
+    min-height: inherit;
 }
 .board-col { display: none; }
 
