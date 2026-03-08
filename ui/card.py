@@ -16,16 +16,16 @@ def due_date_badge(due_date_str: str | None) -> str:
     delta = (due.date() - now.date()).days
 
     if delta < 0:
-        label = f"Vencido há {abs(delta)}d"
+        label = f"-{abs(delta)}d"
         css_class = "badge-prazo-vencido"
     elif delta == 0:
-        label = "Hoje!"
+        label = "hoje"
         css_class = "badge-prazo-hoje"
     elif delta <= 3:
-        label = f"{delta}d restante{'s' if delta > 1 else ''}"
+        label = f"{delta}d"
         css_class = "badge-prazo-alerta"
     else:
-        label = f"{delta}d restante{'s' if delta > 1 else ''}"
+        label = f"{delta}d"
         css_class = "badge-prazo-ok"
 
     return f'<span class="kanban-badge {css_class}">⏰ {label}</span>'
