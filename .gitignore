@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.streamlit/secrets.toml
+.env
+*.egg-info/
+dist/
+build/
+.venv/
+venv/

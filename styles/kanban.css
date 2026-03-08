@@ -1,0 +1,233 @@
+/* ============================================= */
+/* Kanban Board - Custom CSS                     */
+/* ============================================= */
+
+/* ---- Layout geral ---- */
+.block-container {
+    padding-top: 1rem !important;
+    max-width: 100% !important;
+}
+
+/* ---- Colunas do board ---- */
+.kanban-column {
+    background: #1A1D23;
+    border-radius: 12px;
+    padding: 0.8rem;
+    min-height: 70vh;
+}
+
+.kanban-column-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.2rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid #2D3139;
+}
+
+.kanban-column-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.kanban-counter {
+    background: #2D3139;
+    color: #FAFAFA;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+/* ---- Card ---- */
+.kanban-card {
+    background: #23262D;
+    border-radius: 10px;
+    padding: 0.85rem;
+    margin-bottom: 0.6rem;
+    border-left: 4px solid #6C63FF;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.kanban-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+.kanban-card-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+    color: #FAFAFA;
+    word-break: break-word;
+}
+
+.kanban-card-desc {
+    font-size: 0.78rem;
+    color: #9EA3AE;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    word-break: break-word;
+    max-height: 3.5em;
+    overflow: hidden;
+}
+
+/* ---- Badges ---- */
+.kanban-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.5rem;
+    align-items: center;
+}
+
+.kanban-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.badge-category {
+    color: #fff;
+    opacity: 0.9;
+}
+
+.badge-subcategory {
+    background: #2D3139;
+    color: #C0C4CC;
+    border: 1px solid #3A3F47;
+}
+
+/* Prioridade */
+.badge-alta {
+    background: #FF4B4B22;
+    color: #FF4B4B;
+    border: 1px solid #FF4B4B55;
+}
+
+.badge-media {
+    background: #FFA72622;
+    color: #FFA726;
+    border: 1px solid #FFA72655;
+}
+
+.badge-baixa {
+    background: #66BB6A22;
+    color: #66BB6A;
+    border: 1px solid #66BB6A55;
+}
+
+/* Prazo */
+.badge-prazo-ok {
+    background: #66BB6A22;
+    color: #66BB6A;
+    border: 1px solid #66BB6A55;
+}
+
+.badge-prazo-alerta {
+    background: #FFA72622;
+    color: #FFA726;
+    border: 1px solid #FFA72655;
+}
+
+.badge-prazo-vencido {
+    background: #FF4B4B22;
+    color: #FF4B4B;
+    border: 1px solid #FF4B4B55;
+}
+
+.badge-prazo-hoje {
+    background: #FF4B4B22;
+    color: #FF4B4B;
+    border: 1px solid #FF4B4B55;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* ---- Botões de ação do card ---- */
+.kanban-actions {
+    display: flex;
+    gap: 0.3rem;
+    justify-content: flex-end;
+    margin-top: 0.4rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid #2D3139;
+}
+
+/* ---- Sidebar ---- */
+[data-testid="stSidebar"] {
+    min-width: 280px;
+}
+
+[data-testid="stSidebar"] .block-container {
+    padding-top: 1rem;
+}
+
+/* ---- Responsividade ---- */
+@media (max-width: 768px) {
+    .kanban-column {
+        min-height: auto;
+        margin-bottom: 1rem;
+    }
+
+    .kanban-card {
+        padding: 0.7rem;
+    }
+
+    .kanban-badges {
+        gap: 0.25rem;
+    }
+
+    .kanban-badge {
+        font-size: 0.65rem;
+        padding: 0.1rem 0.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .block-container {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+}
+
+/* ---- Scrollbar customizada ---- */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1A1D23;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3A3F47;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4A4F57;
+}
+
+/* ---- Dialog/Modal fix ---- */
+[data-testid="stDialog"] {
+    min-width: 500px;
+}
+
+/* ---- Botões pequenos inline ---- */
+.stButton > button {
+    font-size: 0.8rem !important;
+    padding: 0.2rem 0.6rem !important;
+    border-radius: 6px !important;
+}
