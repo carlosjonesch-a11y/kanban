@@ -59,36 +59,32 @@ def render_board(filters: dict):
             for task in tasks:
                 st.markdown(render_card_html(task), unsafe_allow_html=True)
 
-                # Status dropdown + discrete action buttons
-                col_status, col_edit, col_del = st.columns([3, 1, 1])
+                # Barra de ações: marker CSS + selectbox + botões compactos
+                col_status, col_edit, col_del = st.columns([4, 1, 1], gap="small")
 
                 with col_status:
-                    st.markdown('<div class="card-status-select">', unsafe_allow_html=True)
+                    # Marcador invisível usado pelo CSS :has() para estilizar a linha
+                    st.markdown('<span class="card-action-marker"></span>', unsafe_allow_html=True)
                     current_idx = STATUS_OPTIONS.index(status_key)
                     new_status = st.selectbox(
-                        "Mover",
+                        "Status",
                         options=STATUS_OPTIONS,
                         format_func=lambda s: f"{STATUS_ICONS.get(s, '')} {STATUS_LABELS[s]}",
                         index=current_idx,
                         key=f"status_{task['id']}",
                         label_visibility="collapsed",
                     )
-                    st.markdown('</div>', unsafe_allow_html=True)
                     if new_status != status_key:
                         st.session_state.task_svc.move_task(task["id"], new_status)
                         st.rerun()
 
                 with col_edit:
-                    st.markdown('<div class="card-actions">', unsafe_allow_html=True)
-                    if st.button("✏️", key=f"edit_{task['id']}", help="Editar"):
+                    if st.button("✏️", key=f"edit_{task['id']}", help="Editar", use_container_width=True):
                         st.session_state["edit_task"] = task
-                    st.markdown('</div>', unsafe_allow_html=True)
 
                 with col_del:
-                    st.markdown('<div class="card-actions">', unsafe_allow_html=True)
-                    if st.button("🗑️", key=f"del_{task['id']}", help="Excluir"):
+                    if st.button("🗑️", key=f"del_{task['id']}", help="Excluir", use_container_width=True):
                         st.session_state.task_svc.delete_task(task["id"])
                         st.rerun()
-                    st.markdown('</div>', unsafe_allow_html=True)
 
-                st.markdown("<div style='margin-bottom:0.3rem'></div>", unsafe_allow_html=True)
+                st.markdown("<div style='margin-bottom:0.5rem'></div>", unsafe_allow_html=True)
